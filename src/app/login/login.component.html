@@ -1,0 +1,22 @@
+<div class="container">
+  <form [formGroup]="loginForm" autocomplete="on" (ngSubmit)="onSubmit()" class="form-horizontal">
+    <fieldset>
+      <div id="legend">
+        <legend class="">Login</legend>
+      </div>
+
+      <app-common-field-control formControlName="username" label="Username" fieldName="username"
+        [parentForm]="loginForm"></app-common-field-control>
+
+      <app-common-field-control formControlName="password" label="Password" fieldName="password"
+        [parentForm]="loginForm"></app-common-field-control>
+
+      <div class="form-row mt-3">
+        <div class="controls">
+          <button type="submit" class="btn btn-success" [disabled]="loginForm.invalid">Register</button>
+        </div>
+      </div>
+
+    </fieldset>
+  </form>
+</div>

@@ -1,1 +1,16 @@
-<p>home works!</p>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-4" *ngFor="let book of books$ | async as list">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ book.title }}</h5>
+          <!-- Some borders are removed -->
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{ book.author }}</li>
+            <li class="list-group-item">{{ book.cost }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

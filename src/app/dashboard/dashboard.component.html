@@ -1,1 +1,30 @@
-<p>dashboard works!</p>
+<h3>Users Creation</h3>
+
+<form [formGroup]="userForm" class="primary-container">
+  <input type="text" placeholder="First Name" formControlName="firstName" />
+  <input type="text" placeholder="Last Name" formControlName="lastName" />
+
+  <button type="button" (click)="addAddress()">Add Address</button>
+
+  <div formArrayName="address">
+    <ng-container *ngFor="let address of addressArrayForm.controls; let i = index">
+      <div [formGroupName]="i" class="address-container">
+        <input type="text" placeholder="Street" formControlName="street" />
+        <input type="text" placeholder="City" formControlName="city" />
+        <input type="text" placeholder="State" formControlName="state" />
+        <div class="contacts" formArrayName="contacts">
+          <ng-container *ngFor="let contact of getContactControls(i); let idx=index">
+            <div [formGroupName]="idx">
+              <input placeholder="Contact Person" formControlName="contactPerson">
+              <input placeholder="Phone Number" formControlName="phoneNumber">
+              <button type="button" (click)="removeContact(i, idx)">Remove Contact</button>
+            </div>
+          </ng-container>
+        </div>
+        <button type="button" (click)="addContact(i)">Add Contact</button>
+      </div>
+    </ng-container>
+  </div>
+</form>
+
+<pre>user form {{userForm.value | json}}</pre>

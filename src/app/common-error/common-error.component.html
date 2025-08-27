@@ -1,0 +1,12 @@
+<div *ngIf="formField.errors?.['required']">
+  This field is required.
+</div>
+<div *ngIf="formField.errors?.['minlength']">
+  This field must have at least {{formField.errors?.['minlength'].requiredLength}} character.
+</div>
+<div *ngIf="formField.errors?.['maxlength']">
+  This field must have at most 20 characters.
+</div>
+<div *ngIf="!formField.errors?.['required'] && !formField.errors?.['minlength'] && !formField.errors?.['maxlength']">
+  Invalid {{label}} format.
+</div>

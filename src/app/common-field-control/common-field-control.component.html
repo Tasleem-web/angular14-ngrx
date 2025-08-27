@@ -1,0 +1,12 @@
+<div class="form-row">
+  <label for="{{fieldName}}" class="form-label">{{label}}</label>
+  <input [value]="value" [disabled]="isDisabled" (input)="onChange($event)" (blur)="touched()" type="text"
+    id="{{fieldName}}" name="{{fieldName}}" formControlName="fieldName" required class="form-control"
+    [class.is-invalid]="formField.invalid && (formField.dirty || formField.touched)">
+
+  <!-- errors -->
+  <div *ngIf="formField.invalid && (formField.dirty || formField.touched)" class="invalid-feedback">
+    <app-common-error [formField]="formField" [label]="label"></app-common-error>
+  </div>
+
+</div>

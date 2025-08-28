@@ -12,9 +12,7 @@ import { CommonModule } from '@angular/common';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(
-        () => CommonFieldControlComponent
-      ),
+      useExisting: CommonFieldControlComponent,
       multi: true
     }
   ]

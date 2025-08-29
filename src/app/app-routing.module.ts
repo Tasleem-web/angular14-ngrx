@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { RegistrationComponent } from './registration/registration.component';
-import { LoginComponent } from './login/login.component';
-import { CounterComponent } from './components/counter/counter/counter.component';
+import { DashboardComponent } from './rest-components/dashboard/dashboard.component';
+import { RegistrationComponent } from './rest-components/registration/registration.component';
+import { LoginComponent } from './rest-components/login/login.component';
 
 const routes: Routes = [
   {
@@ -27,11 +26,8 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent
   },
-  {
-    path: 'counter',
-    component: CounterComponent
-  },
   { path: 'employee', loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule) },
+  { path: 'posts', loadChildren: () => import('./posts/posts.module').then(m => m.PostsModule) },
 
 ];
 

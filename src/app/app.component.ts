@@ -12,6 +12,6 @@ export class AppComponent {
     { key: 'login', value: 'Login' },
     { key: 'counter', value: 'Counter' },
     { key: 'employee', value: 'Employee' },
-    // { key: 'posts', value: 'Posts' },
+    { key: 'posts', value: 'Posts' },
   ];
 }

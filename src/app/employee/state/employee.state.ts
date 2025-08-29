@@ -6,10 +6,10 @@ export interface EmployeeDetails {
   state: number
 }
 
-export interface AppState {
+export interface ModuleState {
   employeeDetails: EmployeeDetails[];
 }
 
-export const initialState: AppState = {
+export const initialState: ModuleState = {
   employeeDetails: []
 }

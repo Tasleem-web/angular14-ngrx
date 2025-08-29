@@ -1,0 +1,5 @@
+<select class="form-select" [disabled]="isDisabled" (change)="onSelectChange($event)">
+  <option *ngFor="let option of stateOptions" [value]="option[bindValue]" [selected]="option[bindValue] == value">
+    {{option[bindLabel]}}
+  </option>
+</select>

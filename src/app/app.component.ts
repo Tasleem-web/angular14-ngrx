@@ -11,6 +11,7 @@ export class AppComponent {
     { key: 'register', value: 'Register' },
     { key: 'login', value: 'Login' },
     { key: 'counter', value: 'Counter' },
+    { key: 'employee', value: 'Employee' },
     // { key: 'posts', value: 'Posts' },
   ];
 }

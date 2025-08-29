@@ -1,0 +1,6 @@
+<div *ngIf="formField.errors?.['required']">
+  {{label}} is required.
+</div>
+
+<div *ngIf="formField?.errors?.['email']">Please enter a valid email.</div>
+<div *ngIf="formField?.errors?.['minlength']">Password must be at least 6 characters.</div>

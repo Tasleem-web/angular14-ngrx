@@ -1,0 +1,31 @@
+<div class="container my-5">
+  <fieldset>
+    <div id="legend">
+      <legend class="">Employee Register Form</legend>
+    </div>
+
+    <!-- employee-registration.component.html -->
+    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+
+      <app-input-form-control formControlName="fullName" [fieldName]="'fullName'" [parentFormGroup]="employeeForm"
+        [label]="'Full Name'"></app-input-form-control>
+
+      <app-input-form-control formControlName="email" [fieldName]="'email'" [parentFormGroup]="employeeForm"
+        [label]="'Email'"></app-input-form-control>
+
+      <app-input-form-control formControlName="password" [fieldName]="'password'" [parentFormGroup]="employeeForm"
+        [label]="'Password'"></app-input-form-control>
+
+      <app-custom-radio-button [options]="colorOptions" bindLabel="name" bindValue="value"
+        formControlName="favoriteColor"></app-custom-radio-button>
+
+      <app-custom-select-dropdown formControlName="state" bindLabel="name" bindValue="value"
+        [stateOptions]="stateOptions"></app-custom-select-dropdown>
+
+      <app-custom-checkbox formArrayName="selectedLanguages" bindLabel="name" bindValue="id"
+        [options]="languageOptions"></app-custom-checkbox>
+
+      <button type="submit" class="btn btn-primary mt-3" [disabled]="employeeForm.invalid">Register</button>
+    </form>
+  </fieldset>
+</div>

@@ -1,0 +1,5 @@
+<div *ngFor="let option of options" class="form-check" (blur)="onTouched()">
+  <input class="form-check-input" type="checkbox" [id]="'option-' + option.id" [checked]="isChecked(option.id)"
+    [disabled]="isDisabled" (change)="onCheckboxChange($event, option.id)">
+  <label class="form-check-label" for="inlineCheckbox1">{{option.name}}</label>
+</div>

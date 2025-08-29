@@ -31,6 +31,7 @@ const routes: Routes = [
     path: 'counter',
     component: CounterComponent
   },
+  { path: 'employee', loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule) },
 
 ];
 

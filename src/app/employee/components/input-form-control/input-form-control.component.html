@@ -1,0 +1,11 @@
+<div class="form-group">
+  <label for="fullName">{{label}}</label>
+  <input type="text" class="form-control" id="fullName" [value]="value" [disabled]="isDisabled"
+    (input)="onChange($event)" (blur)="touched()"
+    [class.is-invalid]="formField.invalid && (formField.dirty || formField.touched)">
+
+  <!-- show errors -->
+  <div *ngIf="formField.invalid && (formField.dirty || formField.touched)" class="invalid-feedback">
+    <app-common-error-control [formField]="formField" [label]="label"></app-common-error-control>
+  </div>
+</div>

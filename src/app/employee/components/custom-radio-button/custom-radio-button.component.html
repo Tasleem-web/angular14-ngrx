@@ -1,4 +1,5 @@
-<div class="d-flex">
+<div class="d-flex align-items-center">
+  <span class="me-2">{{label}}</span>
   <div *ngFor="let option of options; let i = index" class="custom-radio-option" [class.selected]="isSelected(option)"
     (click)="selectOption(option)" class="me-3 my-3" tabindex="0" (keydown.enter)="selectOption(option)">
     <input type="radio" id="radio-{{i}}" name="radio-group" checked>

@@ -1,0 +1,25 @@
+<fieldset>
+  <div id="legend">
+    <legend class="">List of Employees</legend>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Full Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Gender</th>
+        <th scope="col">State</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of employeeData; let i =index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{emp.fullName}}</td>
+        <td>{{emp.email}}</td>
+        <td>{{emp.selectGender}}</td>
+        <td>{{emp.state}}</td>
+      </tr>
+    </tbody>
+  </table>
+</fieldset>

@@ -21,6 +21,7 @@ export class CustomSelectDropdownComponent implements ControlValueAccessor {
   @Input() stateOptions: any[] = []
   @Input() bindValue: string = '';
   @Input() bindLabel: string = '';
+  @Input() label: string = '';
 
   public value: any;
   public changed!: (value: any) => void;

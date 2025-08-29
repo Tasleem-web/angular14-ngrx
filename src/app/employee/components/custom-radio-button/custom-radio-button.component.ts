@@ -21,6 +21,7 @@ export class CustomRadioButtonComponent implements ControlValueAccessor {
   @Input() options: any[] = [];
   @Input() bindLabel!: string;
   @Input() bindValue!: string;
+  @Input() label!: string;
 
   private value!: string;
   private onChange!: (value: any) => void;

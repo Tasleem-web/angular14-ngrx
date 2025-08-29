@@ -9,6 +9,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { counterReducer } from './components/counter/state/counter.reducer';
+import { employeeReducer } from './employee/state/employee.reducer';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { counterReducer } from './components/counter/state/counter.reducer';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({ counter: counterReducer }),
+    StoreModule.forRoot({ counter: counterReducer, employee: employeeReducer }),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],

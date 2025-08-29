@@ -20,7 +20,6 @@ export class CustomCounterComponent implements OnInit {
   constructor(private store: Store<{ counter: CounterState }>) { }
   ngOnInit(): void {
     this.store.select(getChangeName).subscribe(changeName => {
-      console.log('custom counter component initialized');
       this.channelName = changeName;
     })
   }

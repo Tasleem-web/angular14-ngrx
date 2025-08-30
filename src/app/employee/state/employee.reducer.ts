@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { ModuleState, initialState } from "./employee.state";
+import { EmployeeState, initialState } from "./employee.state";
 import { register } from "./employee.actions";
 
 
@@ -16,6 +16,6 @@ const _employeeReducer = createReducer(
   })
 )
 
-export function employeeReducer(state: ModuleState | undefined, action: any) {
+export function employeeReducer(state: EmployeeState | undefined, action: any) {
   return _employeeReducer(state, action)
 }

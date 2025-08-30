@@ -1,1 +1,35 @@
-<p>posts works!</p>
+<div class="container">
+  <div class="row">
+    <h2>Post List</h2>
+    <!-- <a class="btn btn-primary" [routerLink]="['/posts/add']">Add Post</a> -->
+    <div class="col-md-8">
+      <h3></h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let post of (posts$ | async) ">
+            <td>{{post.id}}</td>
+            <td>{{post.title}}</td>
+            <td>{{post.description}}</td>
+            <td>
+              <a class="btn btn-primary me-2" [routerLink]="['add']">Add</a>
+              <a class="btn btn-info me-2" [routerLink]="['view', post.id]">View</a>
+              <a class="btn btn-warning me-2" [routerLink]="['edit', post.id]">Update</a>
+              <button class="btn btn-danger" (click)="deletePost(post.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

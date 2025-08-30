@@ -1,0 +1,41 @@
+<div class="container">
+  <h2>Update Post</h2>
+  <hr />
+  <div class="row">
+    <div class="col-md-12">
+      <form [formGroup]="updatePostForm" (ngSubmit)="onUpdateFormSubmit()">
+        <div class="mb-3">
+          <label for="title">Title</label>
+          <input formControlName="title" type="text" id="title" class="form-control">
+          <div *ngIf="updatePostForm.get('title')?.touched && updatePostForm.get('title')?.invalid" class="text-danger">
+            <div *ngIf="updatePostForm.get('title')?.errors?.['required']">
+              Title is required.
+            </div>
+            <div *ngIf="updatePostForm.get('title')?.errors?.['minlength']">
+              Title must be at least 5 characters long.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="description">Description</label>
+          <textarea formControlName="description" id="description" class="form-control"></textarea>
+          <div *ngIf="updatePostForm.get('description')?.touched && updatePostForm.get('description')?.invalid"
+            class="text-danger">
+            <div *ngIf="updatePostForm.get('description')?.errors?.['required']">
+              Description is required.
+            </div>
+            <div *ngIf="updatePostForm.get('description')?.errors?.['minlength']">
+              Description must be at least 10 characters long.
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="!viewPostOnly">
+          <button type="submit" class="btn btn-primary me-3">Update Post</button>
+          <!-- <a class="btn btn-info" [routerLink]="['/posts']">Back to Post</a> -->
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

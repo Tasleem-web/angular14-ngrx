@@ -8,7 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
-import { employeeReducer } from './employee/state/employee.reducer';
+import { appReducer } from './state/app.state';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { employeeReducer } from './employee/state/employee.reducer';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({ employee: employeeReducer }),
+    StoreModule.forRoot(appReducer),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],

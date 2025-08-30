@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModuleState } from '../../state/employee.state';
+import { EmployeeState } from '../../state/employee.state';
 import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/state/app.state';
 
 @Component({
   selector: 'app-employee-list',
@@ -12,9 +13,9 @@ import { Store } from '@ngrx/store';
 })
 export class EmployeeListComponent implements OnInit {
 
-  employeeData!: ModuleState['employeeDetails'];
+  employeeData!: EmployeeState['employeeDetails'];
   constructor(
-    private store: Store<{ employee: ModuleState['employeeDetails'] }>
+    private store: Store<AppState>
   ) { }
 
   ngOnInit(): void {

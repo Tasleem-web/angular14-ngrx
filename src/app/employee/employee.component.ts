@@ -8,7 +8,8 @@ import { CustomCheckboxComponent } from './components/custom-checkbox/custom-che
 import { Store } from '@ngrx/store';
 import { register } from './state/employee.actions';
 import { EmployeeListComponent } from './components/employee-list/employee-list.component';
-import { ModuleState } from './state/employee.state';
+import { EmployeeState } from './state/employee.state';
+import { AppState } from '../state/app.state';
 
 @Component({
   selector: 'app-employee',
@@ -50,7 +51,7 @@ export class EmployeeComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private store: Store<{ employee: ModuleState['employeeDetails'] }>
+    private store: Store<AppState>
   ) { }
 
   ngOnInit(): void {

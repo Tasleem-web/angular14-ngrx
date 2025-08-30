@@ -18,16 +18,17 @@ const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent
   },
-  {
-    path: 'register',
-    component: RegistrationComponent
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
+  // {
+  //   path: 'register',
+  //   component: RegistrationComponent
+  // },
+  // {
+  //   path: 'login',
+  //   component: LoginComponent
+  // },
   { path: 'employee', loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule) },
   { path: 'posts', loadChildren: () => import('./posts/posts.module').then(m => m.PostsModule) },
+  { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
 
 ];
 

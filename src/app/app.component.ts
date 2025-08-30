@@ -8,10 +8,11 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Angular14App';
   routingUrls = [
-    { key: 'register', value: 'Register' },
-    { key: 'login', value: 'Login' },
+    // { key: 'register', value: 'Register' },
+    // { key: 'login', value: 'Login' },
     // { key: 'counter', value: 'Counter' },
     { key: 'employee', value: 'Employee' },
     { key: 'posts', value: 'Posts' },
+    { key: 'auth', value: 'Auth' },
   ];
 }

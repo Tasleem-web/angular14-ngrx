@@ -5,6 +5,9 @@ import { PostsRoutingModule } from './posts-routing.module';
 import { PostsComponent } from './posts.component';
 import { AddPostComponent } from './components/add-post/add-post.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { postsReducer } from './state/post.reducer';
+import { POSTS_FEATURE_KEY } from './state/post.selector';
 
 
 @NgModule({
@@ -15,7 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    PostsRoutingModule
+    PostsRoutingModule,
+    StoreModule.forFeature(POSTS_FEATURE_KEY, postsReducer),
   ]
 })
 export class PostsModule { }

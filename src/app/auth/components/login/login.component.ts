@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
 import { loginStart } from '../../state/auth.actions';
+import { setLoadingState } from 'src/app/state/shared.actions';
 
 @Component({
   selector: 'app-login',
@@ -29,10 +30,9 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginSubmit() {
-    console.log(this.loginForm.value);
-
     const { email, password } = this.loginForm.value;
     this.store.dispatch(loginStart({ email, password }));
+    this.store.dispatch(setLoadingState({ status: true }));
   }
 
 }

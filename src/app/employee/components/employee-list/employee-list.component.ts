@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { EmployeeState } from '../../state/employee.state';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
+import { getEmployee } from '../../state/employee.selector';
 
 @Component({
   selector: 'app-employee-list',
@@ -24,7 +25,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   getEmployeeDetails() {
-    this.store.select('employee').subscribe((data: any) => {
+    this.store.select(getEmployee).subscribe((data: any) => {
       this.employeeData = data.employeeDetails;
     });
   }

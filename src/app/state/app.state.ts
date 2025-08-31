@@ -1,15 +1,16 @@
-import { employeeReducer } from "../employee/state/employee.reducer";
-import { EmployeeState } from "../employee/state/employee.state";
-import { postsReducer } from "../posts/state/post.reducer";
-import { PostsState } from "../posts/state/post.state";
+import { authReducer } from "../auth/state/auth.reducer";
+import { AUTH_STATE_NAME } from "../auth/state/auth.selector";
+import { AuthState } from "../auth/state/auth.state";
+import { sharedReducer } from "./shared.reducer";
+import { SHARED_STATE_NAME } from "./shared.selector";
+import { SharedState } from "./shared.state";
 
 export interface AppState {
-  employee: EmployeeState;
-  posts: PostsState
+  [SHARED_STATE_NAME]: SharedState,
+  [AUTH_STATE_NAME]: AuthState
 }
 
-
 export const appReducer = {
-  employee: employeeReducer,
-  posts: postsReducer
+  [SHARED_STATE_NAME]: sharedReducer,
+  [AUTH_STATE_NAME]: authReducer
 }

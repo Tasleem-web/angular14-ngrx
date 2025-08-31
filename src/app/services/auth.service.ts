@@ -24,4 +24,17 @@ export class AuthService {
     const user = new User(data.email, data.localId, data.idToken, expirationDate);
     return user;
   }
+
+  getErrorMessage(code: string) {
+    switch (code) {
+      case 'EMAIL_NOT_FOUND':
+        return 'Email not found';
+      case 'INVALID_LOGIN_CREDENTIALS':
+        return 'Invalid login credentials';
+      case 'USER_DISABLED':
+        return 'User disabled';
+      default:
+        return 'Unknown error occured';
+    }
+  }
 }

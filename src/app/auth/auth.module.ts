@@ -21,7 +21,7 @@ import { AuthEffects } from './state/auth.effects';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    StoreModule.forFeature(AUTH_STATE_NAME, authReducer),
+    // StoreModule.forFeature(AUTH_STATE_NAME, authReducer),
     EffectsModule.forFeature([AuthEffects]),
     AuthRoutingModule
   ]

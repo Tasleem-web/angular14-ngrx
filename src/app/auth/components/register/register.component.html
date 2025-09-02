@@ -1,1 +1,50 @@
-<p>register works!</p>
+<div class="rows">
+  <div class="col-md-6 offset-md-3">
+    <h3>Register Page</h3>
+    <hr />
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="email">Email</label>
+        <input type="text" id="email" formControlName="email" class="form-control"
+          [class.is-invalid]="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)" />
+        <div
+          *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)"
+          class="invalid-feedback">
+          <div *ngIf="registerForm.get('email')?.errors?.['required']">
+            Email field is required.
+          </div>
+          <div *ngIf="registerForm.get('email')?.errors?.['minlength']">
+            This field must have at least {{registerForm.get('email')?.errors?.['minlength'].requiredLength}} character.
+          </div>
+          <div *ngIf="registerForm.get('email')?.errors?.['maxlength']">
+            This field must have at most {{registerForm.get('email')?.errors?.['maxlength'].requiredLength}} characters.
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" class="form-control"
+          [class.is-invalid]="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)" />
+        <div
+          *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)"
+          class="invalid-feedback">
+          <div *ngIf="registerForm.get('password')?.errors?.['required']">
+            Password field is required.
+          </div>
+          <div *ngIf="registerForm.get('password')?.errors?.['minlength']">
+            This field must have at least {{registerForm.get('password')?.errors?.['minlength'].requiredLength}}
+            character.
+          </div>
+          <div *ngIf="registerForm.get('password')?.errors?.['maxlength']">
+            This field must have at most {{registerForm.get('password')?.errors?.['maxlength'].requiredLength}}
+            characters.
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Register</button>
+      </div>
+
+    </form>
+  </div>
+</div>

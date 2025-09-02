@@ -4,6 +4,7 @@ import { isAuthenticated } from '../auth/state/auth.selector';
 import { Observable } from 'rxjs';
 import { AppState } from '../state/app.state';
 import { logOut } from '../auth/state/auth.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -14,7 +15,8 @@ export class NavBarComponent implements OnInit {
 
   isAuthenticated!: Observable<boolean>;
   constructor(
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -22,7 +24,7 @@ export class NavBarComponent implements OnInit {
   }
 
   routingUrls = [
-    // { key: 'register', value: 'Register' },
+    // { key: 'auth/register', value: 'Register' },
     // { key: 'login', value: 'Login' },
     // { key: 'counter', value: 'Counter' },
     { key: 'employee', value: 'Employee' },
@@ -32,6 +34,7 @@ export class NavBarComponent implements OnInit {
 
   logout() {
     this.store.dispatch(logOut());
+    this.router.navigate(['/auth/login']);
   }
 
 }

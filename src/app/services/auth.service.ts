@@ -18,6 +18,12 @@ export class AuthService {
     );
   }
 
+  register(email: string, password: string): Observable<AuthResponseDto> {
+    return this.http.post<AuthResponseDto>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.FIREBASE_API_KEY}`,
+      { email, password, returnSecureToken: true }
+    );
+  }
+
 
   formatUser(data: AuthResponseDto) {
     const expirationDate = new Date(new Date().getTime() + +data.expiresIn * 1000);
@@ -33,6 +39,8 @@ export class AuthService {
         return 'Invalid login credentials';
       case 'USER_DISABLED':
         return 'User disabled';
+      case 'EMAIL_EXISTS':
+        return 'Email already exists';
       default:
         return 'Unknown error occured';
     }

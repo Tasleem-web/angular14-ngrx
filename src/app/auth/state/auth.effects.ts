@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { loginStart, loginSuccess, logOut } from "./auth.actions";
+import { loginStart, loginSuccess, logOut, registerStart, registerSuccess } from "./auth.actions";
 import { catchError, exhaustMap, map, of, tap } from "rxjs";
 import { AuthService } from "src/app/services/auth.service";
 import { Store } from "@ngrx/store";
@@ -40,23 +40,47 @@ export class AuthEffects {
   })
 
 
-  loginRedirect$ = createEffect(() => {
+  homeRedirect$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(loginSuccess),
+      ofType(...[loginSuccess, registerSuccess]),
       tap(action => {
         this.router.navigate(['/'])
       })
     )
   }, { dispatch: false });
 
+
   logOutRedirect$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(logOut),
       tap(() => {
-        debugger
         this.router.navigate(['/auth/login'])
       })
     )
   }, { dispatch: false });
+
+
+  register$ = createEffect(() => {
+    return this.actions$.pipe(
+
+      ofType(registerStart),
+      exhaustMap(action => {
+        return this.authService.register(action.email, action.password)
+          .pipe(
+            map(data => {
+              this.store.dispatch(setLoadingState({ status: false }));
+              this.store.dispatch(setErrorMessage({ message: '' }));
+              const user = this.authService.formatUser(data);
+              return registerSuccess({ user });
+            }),
+            catchError(err => {
+              const message = this.authService.getErrorMessage(err.error.error.message);
+              this.store.dispatch(setLoadingState({ status: false }));
+              return of(setErrorMessage({ message }));
+            })
+          )
+      })
+    )
+  })
 
 }

@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from './state/app.state';
 import { getErrorMessage, isLoading } from './state/shared.selector';
+import { autoLogin } from './auth/state/auth.actions';
 
 @Component({
   selector: 'app-root',
@@ -27,6 +28,8 @@ export class AppComponent {
     if (this.store.select(getErrorMessage)) {
       this.errorMessage = this.store.select(getErrorMessage);
     }
+
+    this.store.dispatch(autoLogin());
   }
 
 

@@ -3,7 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Store } from '@ngrx/store';
 import { Post } from 'src/app/models/posts.model';
 import { AppState } from 'src/app/state/app.state';
-import { addPost } from '../../state/post.actions';
+import { addPost, addPostData } from '../../state/post.actions';
 
 @Component({
   selector: 'app-add-post',
@@ -35,7 +35,7 @@ export class AddPostComponent implements OnInit {
       description: this.postForm.value.description
     }
 
-    this.Store.dispatch(addPost({ post }));
+    this.Store.dispatch(addPostData({ post }));
   }
 
 }

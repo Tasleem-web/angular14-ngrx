@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Update Post</h2>
+  <h2>{{!viewPostOnly ? 'Update' : 'View'}} Post</h2>
   <hr />
   <div class="row">
     <div class="col-md-12">
@@ -33,7 +33,6 @@
 
         <div *ngIf="!viewPostOnly">
           <button type="submit" class="btn btn-primary me-3">Update Post</button>
-          <!-- <a class="btn btn-info" [routerLink]="['/posts']">Back to Post</a> -->
         </div>
       </form>
     </div>

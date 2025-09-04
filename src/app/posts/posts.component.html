@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <h2>Post List</h2>
-    <!-- <a class="btn btn-primary" [routerLink]="['/posts/add']">Add Post</a> -->
+    <a class="btn btn-primary" [routerLink]="['add']">Add Post</a>
     <div class="col-md-8">
       <h3></h3>
       <table class="table table-striped">
@@ -19,7 +19,7 @@
             <td>{{post.title}}</td>
             <td>{{post.description}}</td>
             <td>
-              <a class="btn btn-primary me-2" [routerLink]="['add']">Add</a>
+              <!-- <a class="btn btn-primary me-2" [routerLink]="['add']">Add</a> -->
               <a class="btn btn-info me-2" [routerLink]="['view', post.id]">View</a>
               <a class="btn btn-warning me-2" [routerLink]="['edit', post.id]">Update</a>
               <button class="btn btn-danger" (click)="deletePost(post.id)">Delete</button>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './rest-components/dashboard/dashboard.component';
-// import { AuthGuard } from './guards/auth-guard.guard';
+import { AuthGuard } from './guards/auth-guard.guard';
 
 const routes: Routes = [
   {
@@ -28,7 +28,7 @@ const routes: Routes = [
   {
     path: 'employee',
     loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule),
-    // canLoad: [AuthGuard]
+    canLoad: [AuthGuard]
   },
   { path: 'posts', loadChildren: () => import('./posts/posts.module').then(m => m.PostsModule) },
   {

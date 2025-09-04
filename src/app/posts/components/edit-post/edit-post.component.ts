@@ -7,6 +7,7 @@ import { updatePost } from '../../state/post.actions';
 import { FormControl, FormGroup, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { getPostById } from '../../state/post.selector';
 import { Post } from 'src/app/models/posts.model';
+import { setLoadingState } from 'src/app/state/shared.actions';
 
 @Component({
   selector: 'app-edit-post',
@@ -33,18 +34,18 @@ export class EditPostComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if (id) {
-        this.store.select(getPostById(+id)).subscribe(post => {
+        this.store.select(getPostById(id)).subscribe(post => {
+          this.store.dispatch(setLoadingState({ status: true }))
           if (post) this.post = post;
           this.updatePostForm?.patchValue({
             title: post?.title,
             description: post?.description
           });
+          this.store.dispatch(setLoadingState({ status: false }))
         });
       }
     });
-    if (this.viewPostOnly) this.updatePostForm.disable();
-
-
+    if (this.viewPostOnly) this.updatePostForm.disable()
   }
 
   formCreation() {
@@ -61,7 +62,6 @@ export class EditPostComponent implements OnInit {
       description: this.updatePostForm.value.description
     }
     this.store.dispatch(updatePost({ post }));
-
   }
 
 }

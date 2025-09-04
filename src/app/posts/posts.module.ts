@@ -8,6 +8,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { postsReducer } from './state/post.reducer';
 import { POSTS_FEATURE_KEY } from './state/post.selector';
+import { EffectsModule } from '@ngrx/effects';
+import { PostEffects } from './state/post.effects';
 
 
 @NgModule({
@@ -20,6 +22,7 @@ import { POSTS_FEATURE_KEY } from './state/post.selector';
     ReactiveFormsModule,
     PostsRoutingModule,
     StoreModule.forFeature(POSTS_FEATURE_KEY, postsReducer),
+    EffectsModule.forFeature([PostEffects])
   ]
 })
 export class PostsModule { }

@@ -1,13 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
 import { updatePost } from '../../state/post.actions';
 import { FormControl, FormGroup, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { getPostById } from '../../state/post.selector';
 import { Post } from 'src/app/models/posts.model';
-import { setLoadingState } from 'src/app/state/shared.actions';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-post',
@@ -16,14 +16,14 @@ import { setLoadingState } from 'src/app/state/shared.actions';
   templateUrl: './edit-post.component.html',
   styleUrls: ['./edit-post.component.scss']
 })
-export class EditPostComponent implements OnInit {
+export class EditPostComponent implements OnInit, OnDestroy {
 
   updatePostForm!: FormGroup;
   post!: Post;
   viewPostOnly: boolean = false;
+  postSubscription!: Subscription;
 
   constructor(
-    private route: ActivatedRoute,
     private store: Store<AppState>,
     private router: Router
   ) { }
@@ -31,20 +31,16 @@ export class EditPostComponent implements OnInit {
   ngOnInit(): void {
     this.formCreation();
     this.viewPostOnly = this.router.url.includes('view');
-    this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
-      if (id) {
-        this.store.select(getPostById(id)).subscribe(post => {
-          this.store.dispatch(setLoadingState({ status: true }))
-          if (post) this.post = post;
-          this.updatePostForm?.patchValue({
-            title: post?.title,
-            description: post?.description
-          });
-          this.store.dispatch(setLoadingState({ status: false }))
-        });
+    this.postSubscription = this.store.select(getPostById).subscribe(post => {
+      if (post) {
+        this.post = post;
+        this.updatePostForm.patchValue({
+          title: post.title,
+          description: post.description
+        })
       }
-    });
+    })
+
     if (this.viewPostOnly) this.updatePostForm.disable()
   }
 
@@ -62,6 +58,10 @@ export class EditPostComponent implements OnInit {
       description: this.updatePostForm.value.description
     }
     this.store.dispatch(updatePost({ post }));
+  }
+
+  ngOnDestroy(): void {
+    if (this.postSubscription) this.postSubscription.unsubscribe()
   }
 
 }

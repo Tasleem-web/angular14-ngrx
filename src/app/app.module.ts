@@ -14,6 +14,8 @@ import { RouterModule } from '@angular/router';
 import { appReducer } from './state/app.state';
 import { AuthEffects } from './auth/state/auth.effects';
 import { AuthTokenServiceInterceptor } from './services/authToken.interceptor';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { RouterSerializer } from './state/router/router.serializer';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +30,10 @@ import { AuthTokenServiceInterceptor } from './services/authToken.interceptor';
     SharedModule,
     StoreModule.forRoot(appReducer),
     EffectsModule.forRoot([AuthEffects]),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    StoreRouterConnectingModule.forRoot({
+      serializer: RouterSerializer
+    }),
   ],
   providers: [
     {

@@ -7,8 +7,6 @@ import { autoLogin } from './auth/state/auth.actions';
 
 @Component({
   selector: 'app-root',
-  // standalone: true,
-  // imports: [LoadingSpinnerComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })

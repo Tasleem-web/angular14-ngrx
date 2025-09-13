@@ -4,8 +4,9 @@ import { Store } from "@ngrx/store";
 import { PostService } from "src/app/services/posts.service";
 import { AppState } from "src/app/state/app.state";
 import { addPost, addPostData, addPostSuccess, deletePostById, deletePostSuccess, loadPosts, loadPostsSuccess, UPDATE_POST_ACTION, updatePost, updatePostSuccess } from "./post.actions";
-import { map, merge, mergeMap, of, retry, switchMap } from "rxjs";
+import { filter, map, merge, mergeMap, of, retry, switchMap } from "rxjs";
 import { setLoadingState } from "src/app/state/shared.actions";
+import { ROUTER_NAVIGATED, RouterNavigatedAction, RouterNavigationAction } from "@ngrx/router-store";
 
 @Injectable()
 export class PostEffects {
@@ -19,7 +20,7 @@ export class PostEffects {
     return this.actions$.pipe(
       ofType(loadPosts),
       mergeMap((action) => {
-        this.store.dispatch(setLoadingState({ status: true }));
+        // this.store.dispatch(setLoadingState({ status: true }));
         return this.postService.getPosts()
           .pipe(
             map(post => {
@@ -80,4 +81,28 @@ export class PostEffects {
       })
     )
   })
+
+  singlePost$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ROUTER_NAVIGATED),
+      filter((router: RouterNavigatedAction) => {
+        return router.payload.routerState.url.startsWith('/posts/details');
+      }),
+      map((r: RouterNavigatedAction) => {
+        // Access params from firstChild if available, otherwise root
+        const root = r.payload.routerState.root;
+        const params = root && root.firstChild ? root.firstChild.params : root ? root.params : {};
+        return params['id'];
+      }),
+      switchMap(id => {
+        return this.postService.getPostById(id).pipe(
+          map(post => {
+            const postData = [{ ...post, id }];
+            return loadPostsSuccess({ posts: postData })
+          })
+        )
+      })
+
+    )
+  });
 }

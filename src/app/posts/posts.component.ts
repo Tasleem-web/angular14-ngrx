@@ -20,7 +20,8 @@ export class PostsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.posts$ = this.store.select(getPosts)
+    this.store.dispatch(setLoadingState({ status: true }));
+    this.posts$ = this.store.select(getPosts);
     this.store.dispatch(loadPosts());
   }
 

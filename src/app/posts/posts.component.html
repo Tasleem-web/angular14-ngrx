@@ -19,9 +19,9 @@
             <td>{{post.title}}</td>
             <td>{{post.description}}</td>
             <td>
-              <!-- <a class="btn btn-primary me-2" [routerLink]="['add']">Add</a> -->
               <a class="btn btn-info me-2" [routerLink]="['view', post.id]">View</a>
               <a class="btn btn-warning me-2" [routerLink]="['edit', post.id]">Update</a>
+              <a class="btn btn-secondary me-2" [routerLink]="['details', post.id]">Post details</a>
               <button class="btn btn-danger" (click)="deletePost(post.id)">Delete</button>
             </td>
           </tr>

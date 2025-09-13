@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './rest-components/dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth-guard.guard';
+import { SinglePostComponent } from './single-post/single-post.component';
 
 const routes: Routes = [
   {
@@ -18,8 +19,8 @@ const routes: Routes = [
     component: DashboardComponent
   },
   // {
-  //   path: 'register',
-  //   component: RegistrationComponent
+  //   path: 'posts/details/:id',
+  //   component: SinglePostComponent
   // },
   // {
   //   path: 'login',
@@ -34,7 +35,6 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
-    // canLoad: [AuthGuard]
   },
 
 ];

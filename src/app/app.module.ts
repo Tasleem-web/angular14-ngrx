@@ -16,11 +16,12 @@ import { AuthEffects } from './auth/state/auth.effects';
 import { AuthTokenServiceInterceptor } from './services/authToken.interceptor';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { RouterSerializer } from './state/router/router.serializer';
+import { SinglePostComponent } from './single-post/single-post.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
-    // LoadingSpinnerComponent
+    SinglePostComponent,
   ],
   imports: [
     BrowserModule,

@@ -18,10 +18,10 @@ const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent
   },
-  // {
-  //   path: 'posts/details/:id',
-  //   component: SinglePostComponent
-  // },
+  {
+    path: 'posts/details/:id',
+    component: SinglePostComponent
+  },
   // {
   //   path: 'login',
   //   component: LoginComponent

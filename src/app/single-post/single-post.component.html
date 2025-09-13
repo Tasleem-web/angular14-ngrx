@@ -1,10 +1,12 @@
 <div class="container">
   <div>Post details</div>
-  <div *ngIf="post | async as postData">
-    <div>Id - {{ postData.id }}</div>
-    <div>Title - {{ postData.title }}</div>
-    <p>description - {{ postData.description }}</p>
-  </div>
+  <ng-container *ngIf="post">
+    <div *ngIf="post | async as postData">
+      <div>Id - {{ postData.id }}</div>
+      <div>Title - {{ postData.title }}</div>
+      <p>description - {{ postData.description }}</p>
+    </div>
+  </ng-container>
   <div>
     <a [routerLink]="['/posts']">Back to post</a>
   </div>

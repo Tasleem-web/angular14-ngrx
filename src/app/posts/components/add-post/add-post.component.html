@@ -31,7 +31,7 @@
         </div>
 
         <div>
-          <button type="submit" class="btn btn-primary me-3">Add Post</button>
+          <button type="submit" class="btn btn-primary me-3" [disabled]="postForm.invalid">Add Post</button>
           <!-- <a class="btn btn-info" [routerLink]="['/posts']">Back to Post</a> -->
         </div>
       </form>

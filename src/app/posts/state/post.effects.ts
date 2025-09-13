@@ -4,9 +4,12 @@ import { Store } from "@ngrx/store";
 import { PostService } from "src/app/services/posts.service";
 import { AppState } from "src/app/state/app.state";
 import { addPost, addPostData, addPostSuccess, deletePostById, deletePostSuccess, loadPosts, loadPostsSuccess, UPDATE_POST_ACTION, updatePost, updatePostSuccess } from "./post.actions";
-import { filter, map, merge, mergeMap, of, retry, switchMap } from "rxjs";
+import { filter, map, merge, mergeMap, of, retry, switchMap, withLatestFrom } from "rxjs";
 import { setLoadingState } from "src/app/state/shared.actions";
 import { ROUTER_NAVIGATED, RouterNavigatedAction, RouterNavigationAction } from "@ngrx/router-store";
+import { Update } from "@ngrx/entity";
+import { Post } from "src/app/models/posts.model";
+import { getPosts } from "./post.selector";
 
 @Injectable()
 export class PostEffects {
@@ -19,15 +22,20 @@ export class PostEffects {
   loadPosts$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(loadPosts),
-      mergeMap((action) => {
-        // this.store.dispatch(setLoadingState({ status: true }));
-        return this.postService.getPosts()
-          .pipe(
-            map(post => {
-              this.store.dispatch(setLoadingState({ status: false }));
-              return loadPostsSuccess({ posts: post });
-            })
-          )
+      withLatestFrom(this.store.select(getPosts)),
+      mergeMap(([action, posts]) => {
+        this.store.dispatch(setLoadingState({ status: true }));
+        if (!posts.length) {
+          return this.postService.getPosts()
+            .pipe(
+              map(post => {
+                this.store.dispatch(setLoadingState({ status: false }));
+                return loadPostsSuccess({ posts: post });
+              })
+            )
+        } else {
+          return of({ type: 'NO_ACTION' });
+        }
       })
     )
   });
@@ -58,8 +66,12 @@ export class PostEffects {
         return this.postService.updatePost(action.post)
           .pipe(
             map(data => {
+              const updatedPost: Update<Post> = {
+                id: action.post.id ?? '',
+                changes: { ...action.post }
+              }
               this.store.dispatch(setLoadingState({ status: false }));
-              return updatePostSuccess({ post: action.post })
+              return updatePostSuccess({ post: updatedPost })
             })
           )
       })
@@ -94,13 +106,18 @@ export class PostEffects {
         const params = root && root.firstChild ? root.firstChild.params : root ? root.params : {};
         return params['id'];
       }),
-      switchMap(id => {
-        return this.postService.getPostById(id).pipe(
-          map(post => {
-            const postData = [{ ...post, id }];
-            return loadPostsSuccess({ posts: postData })
-          })
-        )
+      withLatestFrom(this.store.select(getPosts)),
+      switchMap(([id, posts]) => {
+        if (!posts) {
+          return this.postService.getPostById(id).pipe(
+            map(post => {
+              const postData = [{ ...post, id }];
+              return loadPostsSuccess({ posts: postData })
+            })
+          )
+        } else {
+          return of({ type: 'NO_ACTION' });
+        }
       })
 
     )

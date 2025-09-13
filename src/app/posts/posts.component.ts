@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
-import { getPosts } from './state/post.selector';
+import { getCount, getPosts } from './state/post.selector';
 import { Observable } from 'rxjs';
 import { Post } from '../models/posts.model';
 import { deletePostById, loadPosts } from './state/post.actions';
@@ -15,6 +15,8 @@ import { setLoadingState } from '../state/shared.actions';
 export class PostsComponent implements OnInit {
 
   posts$!: Observable<Post[]>;
+  count$!: Observable<number>;
+
   constructor(
     private store: Store<AppState>
   ) { }
@@ -22,6 +24,7 @@ export class PostsComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(setLoadingState({ status: true }));
     this.posts$ = this.store.select(getPosts);
+    this.count$ = this.store.select(getCount);
     this.store.dispatch(loadPosts());
   }
 

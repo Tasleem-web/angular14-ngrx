@@ -32,7 +32,7 @@
         </div>
 
         <div *ngIf="!viewPostOnly">
-          <button type="submit" class="btn btn-primary me-3">Update Post</button>
+          <button type="submit" class="btn btn-primary me-3" [disabled]="updatePostForm.invalid">Update Post</button>
         </div>
       </form>
     </div>

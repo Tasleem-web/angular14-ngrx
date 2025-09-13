@@ -1,3 +1,4 @@
+import { Update } from "@ngrx/entity";
 import { createAction, props } from "@ngrx/store";
 import { Post } from "src/app/models/posts.model";
 
@@ -17,7 +18,7 @@ export const DELETE_POST_SUCCESS = '[POST page] deleted post';
 
 export const addPost = createAction(ADD_POST_ACTION, props<{ post: Post }>());
 export const updatePost = createAction(UPDATE_POST_ACTION, props<{ post: Post }>());
-export const updatePostSuccess = createAction(UPDATE_POST_ACTION, props<{ post: Post }>());
+export const updatePostSuccess = createAction(UPDATE_POST_ACTION, props<{ post: Update<Post> }>());
 // export const deletePostById = createAction(DELETE_POST_ACTION, props<{ postId: number }>());
 
 // API Calls

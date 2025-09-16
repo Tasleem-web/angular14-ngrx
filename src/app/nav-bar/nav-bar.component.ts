@@ -29,6 +29,7 @@ export class NavBarComponent implements OnInit {
     // { key: 'counter', value: 'Counter' },
     { key: 'employee', value: 'Employee' },
     { key: 'posts', value: 'Posts' },
+    { key: 'post-item-detail', value: 'Post Item Details' },
     // { key: 'auth', value: 'Auth' },
   ];
 

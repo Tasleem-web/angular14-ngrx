@@ -1,0 +1,21 @@
+<div class="container">
+  <h3>{{editPost ? 'Edit post': (viewPost ? 'Veiw post': 'Add post')}} </h3>
+  <form [formGroup]="postForm" (ngSubmit)="submitPostForm()">
+    <div class="">
+      <label for="title">Title</label>
+      <input id="title" name="title" class="form-control" formControlName="title" />
+    </div>
+    <div class="my-3">
+      <label for="description">Description</label>
+      <input id="description" name="description" class="form-control" formControlName="description" />
+    </div>
+
+    <div>
+      <ng-container *ngIf="!viewPost">
+        <button class="btn btn-primary" type="submit" [disabled]="!postForm.valid">
+          {{editPost ? 'Update post': 'Add post'}}
+        </button>
+      </ng-container>
+    </div>
+  </form>
+</div>

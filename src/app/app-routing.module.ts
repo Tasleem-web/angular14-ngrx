@@ -36,6 +36,7 @@ const routes: Routes = [
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
   },
+  { path: 'post-item-detail', loadChildren: () => import('./post-item-details/post-item-details.module').then(m => m.PostItemDetailsModule) },
 
 ];
 

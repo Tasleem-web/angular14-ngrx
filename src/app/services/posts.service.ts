@@ -10,7 +10,7 @@ export class PostService {
   constructor(private http: HttpClient) { }
 
   getPosts(): Observable<Post[]> {
-    return this.http.get<Post>('https://vue-completecourse.firebaseio.com/posts.json')
+    return this.http.get<Post>('https://angular-http-call-default-rtdb.firebaseio.com/posts.json')
       .pipe(
         map((post: any) => {
           const posts: Post[] = [];
@@ -26,7 +26,7 @@ export class PostService {
   }
 
   addPost(post: Post): Observable<{ name: string }> {
-    return this.http.post<{ name: string }>(`https://vue-completecourse.firebaseio.com/posts.json`, post);
+    return this.http.post<{ name: string }>(`https://angular-http-call-default-rtdb.firebaseio.com/posts.json`, post);
   }
 
   updatePost(post: Post) {
@@ -38,15 +38,15 @@ export class PostService {
       [post.id]: { title: post.title, description: post.description }
     };
 
-    return this.http.patch<{ name: string }>(`https://vue-completecourse.firebaseio.com/posts.json`, postData);
+    return this.http.patch<{ name: string }>(`https://angular-http-call-default-rtdb.firebaseio.com/posts.json`, postData);
   }
 
   deletePostById(postId: string) {
-    return this.http.delete(`https://vue-completecourse.firebaseio.com/posts/${postId}.json`);
+    return this.http.delete(`https://angular-http-call-default-rtdb.firebaseio.com/posts/${postId}.json`);
   }
 
   getPostById(postId: number): Observable<Post> {
-    return this.http.get<Post>(`https://vue-completecourse.firebaseio.com/posts/${postId}.json`);
+    return this.http.get<Post>(`https://angular-http-call-default-rtdb.firebaseio.com/posts/${postId}.json`);
   }
 
 }

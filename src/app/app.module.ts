@@ -17,6 +17,9 @@ import { AuthTokenServiceInterceptor } from './services/authToken.interceptor';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { RouterSerializer } from './state/router/router.serializer';
 import { SinglePostComponent } from './single-post/single-post.component';
+import { EntityDataModule, EntityDataService } from '@ngrx/data';
+import { entityConfig } from './store/post-item-entity-metadata';
+import { PostItemEntityDataService } from './post-item-details/components/services/post-item-entity-data.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +38,7 @@ import { SinglePostComponent } from './single-post/single-post.component';
     StoreRouterConnectingModule.forRoot({
       serializer: RouterSerializer
     }),
+    EntityDataModule.forRoot({})
   ],
   providers: [
     {
